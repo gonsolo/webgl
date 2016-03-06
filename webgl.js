@@ -7,6 +7,8 @@ function attachShaderFromSource(program, source, type) {
 
 function init() {
 
+    gl = document.getElementById("glcanvas").getContext("webgl")
+
     program = gl.createProgram();
 
     vertexSource = 'attribute vec2 p; \
@@ -38,16 +40,17 @@ function init() {
 }
 
 function draw() {
-    t = 0;
-    setInterval(function () {
-        gl.clear(gl.COLOR_BUFFER_BIT);
-        gl.uniform1f(rot, t += 0.01);
-        gl.drawArrays(4, 0, 3);
-    }, 10);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.uniform1f(rot, t += 0.01);
+    gl.drawArrays(4, 0, 3);
 }
 
-gl = document.getElementById("glcanvas").getContext("webgl")
+function main() {
+    t = 0;
+    setInterval(draw, 10);
+}
+
 init()
-draw()
+main()
 
 
